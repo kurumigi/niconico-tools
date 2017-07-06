@@ -201,7 +201,7 @@ class Info(utils.CanopyAsync):
         }
         if dmc_info:
             info.update({
-                KeyDmc.API_URL      : session_api["api_urls"][0],  # str
+                KeyDmc.API_URL      : session_api["urls"][0],  # str
                 KeyDmc.RECIPE_ID    : session_api["recipe_id"],  # str
                 KeyDmc.CONTENT_ID   : session_api["content_id"],  # str
                 KeyDmc.VIDEO_SRC_IDS: session_api["videos"],  # List[str]
@@ -281,7 +281,7 @@ class Info(utils.CanopyAsync):
             info.update({
                 KeyDmc.MSG_SERVER   : dmc_info["thread"]["server_url"],  # type: str
                 KeyDmc.THREAD_ID    : dmc_info["thread"]["thread_id"],  # type: int
-                KeyDmc.API_URL      : session_api["api_urls"][0],  # type: str
+                KeyDmc.API_URL      : session_api["urls"][0],  # type: str
                 KeyDmc.RECIPE_ID    : session_api["recipe_id"],  # type: str
                 KeyDmc.CONTENT_ID   : session_api["content_id"],  # type: str
                 KeyDmc.VIDEO_SRC_IDS: session_api["videos"],  # type: List[str]
@@ -776,7 +776,7 @@ class VideoDmc(utils.CanopyAsync):
         self.logger.debug("Attempting to first negotiation of %s", video_id)
         self.logger.debug("This is the posting XML: %s", payload)
         async with self.session.post(
-                url=self.glossary[video_id][KeyDmc.API_URL],
+                url=self.glossary[video_id][KeyDmc.API_URL]["url"],
                 params={"_format": "xml"},
                 data=payload,
         ) as response:  # type: aiohttp.ClientResponse
@@ -787,7 +787,7 @@ class VideoDmc(utils.CanopyAsync):
         self.logger.debug("Attempting to first negotiation of %s", video_id)
         self.logger.debug("This is the posting JSON: %s", payload)
         async with self.session.post(
-                url=self.glossary[video_id][KeyDmc.API_URL],
+                url=self.glossary[video_id][KeyDmc.API_URL]["url"],
                 params={"_format": "json"},
                 data=payload,
         ) as response:  # type: aiohttp.ClientResponse
@@ -962,7 +962,7 @@ class VideoDmc(utils.CanopyAsync):
         """
         try:
             self.logger.debug("返ってきたXML: %s", text)
-            api_url = self.glossary[video_id][KeyDmc.API_URL]
+            api_url = self.glossary[video_id][KeyDmc.API_URL]["url"]
             # 1分ちょうどで送ると遅れるので、待ち時間を少し早める
             waiting = (self.glossary[video_id][KeyDmc.HEARTBEAT] / 1000) - 5
             companion = self._extract_session_tag(text)
