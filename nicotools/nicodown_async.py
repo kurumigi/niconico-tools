@@ -140,7 +140,7 @@ class Info(utils.CanopyAsync):
                     else:
                         st = response.status
                         break
-            raise aiohttp.errors.HttpProcessingError(
+            raise aiohttp.http.HttpProcessingError(
                 code=st, message=Err.connection_timeout.format(video_id))
 
     def _pick_info_from_watch_api(self, content: str) -> Dict:
