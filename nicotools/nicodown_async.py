@@ -237,12 +237,12 @@ class Info(utils.CanopyAsync):
 
         info = {
             KeyDmc.VIDEO_ID     : _video["id"],  # type: str
-            KeyDmc.VIDEO_URL_SM : _video["source"],  # type: str
+            KeyDmc.VIDEO_URL_SM : _video["smileInfo"]["url"],  # type: str
             KeyDmc.TITLE        : _video["originalTitle"],  # type: str
             KeyDmc.FILE_NAME    : utils.t2filename(_video["originalTitle"]),
             KeyDmc.FILE_SIZE    : None,
             KeyDmc.THUMBNAIL_URL: _video["thumbnailURL"],  # type: str
-            KeyDmc.ECO          : j["context"]["isEconomy"],  # type: int
+            KeyDmc.ECO          : 1 if (_video["smileInfo"]["currentQualityId"] == "low") else 0,  # type: int
             KeyDmc.MOVIE_TYPE   : _video["movieType"],  # type: str
             KeyDmc.DELETED      : dmc_info["video"]["deleted"],  # type: int
             KeyDmc.IS_DELETED   : _video["isDeleted"],  # type: bool
