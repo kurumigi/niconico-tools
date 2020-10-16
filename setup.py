@@ -20,7 +20,8 @@ setup(
         'Natural Language :: Japanese',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.7'',
+        'Programming Language :: Python :: 3.8'
     ],
     long_description=readme,
     keywords=['niconico', 'nicovideo', 'ニコニコ動画'],
