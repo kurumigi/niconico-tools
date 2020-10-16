@@ -50,6 +50,7 @@ def validator(input_list):
     受け入れるのは以下の形式:
         * "*"
         * http://www.nicovideo.jp/watch/sm123456
+        * https://www.nicovideo.jp/watch/sm123456
         * http://nico.ms/sm123456
         * sm1234
         * watch/sm123456
@@ -67,7 +68,7 @@ def validator(input_list):
         """\s*(?:
         {0}|  # 「全て」を指定するときの記号
         (?:
-            (?:(?:h?t?tp://)?www\.nicovideo\.jp/)?watch/  # 通常URL
+            (?:(?:h?t?tps?://)?www\.nicovideo\.jp/)?watch/  # 通常URL
            |(?:h?t?tp://)?nico\.ms/  # 短縮URL
         )?
             ((?:sm|nm|so)?\d+)  # ID本体
@@ -482,34 +483,34 @@ class NTLogger(logging.Logger):
 
 class URL:
     URL_LogIn  = "https://secure.nicovideo.jp/secure/login?site=niconico"
-    URL_Watch  = "http://www.nicovideo.jp/watch/"
-    URL_GetFlv = "http://ext.nicovideo.jp/api/getflv/"
-    URL_Info   = "http://ext.nicovideo.jp/api/getthumbinfo/"
-    URL_Pict   = "http://tn-skr1.smilevideo.jp/smile"
-    URL_GetThreadKey = "http://flapi.nicovideo.jp/api/getthreadkey"
-    URL_WayBackKey = "http://flapi.nicovideo.jp/api/getwaybackkey"
-    URL_Msg_JSON = "http://nmsg.nicovideo.jp/api.json/"
-    URL_Msg_XML = "http://nmsg.nicovideo.jp/api/"
+    URL_Watch  = "https://www.nicovideo.jp/watch/"
+    URL_GetFlv = "https://ext.nicovideo.jp/api/getflv/"
+    URL_Info   = "https://ext.nicovideo.jp/api/getthumbinfo/"
+    URL_Pict   = "https://tn-skr1.smilevideo.jp/smile"
+    URL_GetThreadKey = "https://flapi.nicovideo.jp/api/getthreadkey"
+    URL_WayBackKey = "https://flapi.nicovideo.jp/api/getwaybackkey"
+    URL_Msg_JSON = "https://nmsg.nicovideo.jp/api.json/"
+    URL_Msg_XML = "https://nmsg.nicovideo.jp/api/"
 
     # 一般のマイリストを扱うためのAPI
-    URL_MyListTop  = "http://www.nicovideo.jp/my/mylist"
-    URL_ListAll    = "http://www.nicovideo.jp/api/mylistgroup/list"
-    URL_AddMyList  = "http://www.nicovideo.jp/api/mylistgroup/add"
-    URL_PurgeList  = "http://www.nicovideo.jp/api/mylistgroup/delete"
-    URL_ListOne    = "http://www.nicovideo.jp/api/mylist/list"
-    URL_AddItem    = "http://www.nicovideo.jp/api/mylist/add"
-    URL_DeleteItem = "http://www.nicovideo.jp/api/mylist/delete"
-    URL_CopyItem   = "http://www.nicovideo.jp/api/mylist/copy"
-    URL_MoveItem   = "http://www.nicovideo.jp/api/mylist/move"
-    URL_UpdateItem = "http://www.nicovideo.jp/api/mylist/update"
+    URL_MyListTop  = "https://www.nicovideo.jp/my/mylist"
+    URL_ListAll    = "https://www.nicovideo.jp/api/mylistgroup/list"
+    URL_AddMyList  = "https://www.nicovideo.jp/api/mylistgroup/add"
+    URL_PurgeList  = "https://www.nicovideo.jp/api/mylistgroup/delete"
+    URL_ListOne    = "https://www.nicovideo.jp/api/mylist/list"
+    URL_AddItem    = "https://www.nicovideo.jp/api/mylist/add"
+    URL_DeleteItem = "https://www.nicovideo.jp/api/mylist/delete"
+    URL_CopyItem   = "https://www.nicovideo.jp/api/mylist/copy"
+    URL_MoveItem   = "https://www.nicovideo.jp/api/mylist/move"
+    URL_UpdateItem = "https://www.nicovideo.jp/api/mylist/update"
 
     # とりあえずマイリストを扱うためのAPI
-    URL_ListDef   = "http://www.nicovideo.jp/api/deflist/list"
-    URL_AddDef    = "http://www.nicovideo.jp/api/deflist/add"
-    URL_DeleteDef = "http://www.nicovideo.jp/api/deflist/delete"
-    URL_CopyDef   = "http://www.nicovideo.jp/api/deflist/copy"
-    URL_MoveDef   = "http://www.nicovideo.jp/api/deflist/move"
-    URL_UpdateDef = "http://www.nicovideo.jp/api/deflist/update"
+    URL_ListDef   = "https://www.nicovideo.jp/api/deflist/list"
+    URL_AddDef    = "https://www.nicovideo.jp/api/deflist/add"
+    URL_DeleteDef = "https://www.nicovideo.jp/api/deflist/delete"
+    URL_CopyDef   = "https://www.nicovideo.jp/api/deflist/copy"
+    URL_MoveDef   = "https://www.nicovideo.jp/api/deflist/move"
+    URL_UpdateDef = "https://www.nicovideo.jp/api/deflist/update"
 
 
 class Msg:
