@@ -482,7 +482,7 @@ class NTLogger(logging.Logger):
 
 
 class URL:
-    URL_LogIn  = "https://secure.nicovideo.jp/secure/login?site=niconico"
+    URL_LogIn  = "https://account.nicovideo.jp/api/v1/login"
     URL_Watch  = "https://www.nicovideo.jp/watch/"
     URL_GetFlv = "https://ext.nicovideo.jp/api/getflv/"
     URL_Info   = "https://ext.nicovideo.jp/api/getthumbinfo/"
