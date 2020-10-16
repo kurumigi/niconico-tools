@@ -302,6 +302,10 @@ class LogIn:
                 session.cookies = cookies.cookiejar_from_dict(cook)
             else:
                 session.post(URL.URL_LogIn, params=auth)
+
+            if 'mypage_old' not in session.cookies:
+                session.cookies['mypage_old'] = 'true'
+
             self.token = self.get_token(session)
             if self.token:
                 # if self._we_have_logged_in(res.text):
