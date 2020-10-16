@@ -28,7 +28,7 @@ setup(
         'requests',
         'prettytable',
         'bs4',
-        'aiohttp',
+        'aiohttp>=3.5.0',
         'tqdm',
         'multidict'
     ],

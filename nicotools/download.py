@@ -515,7 +515,8 @@ class Video(utils.Canopy):
 
     async def get_session(self, mail: str, password: str) -> aiohttp.ClientSession:
         cook = utils.LogIn(mail=mail, password=password).cookie
-        return aiohttp.ClientSession(cookies=cook)
+        time = aiohttp.ClientTimeout(total=None, sock_read=60)
+        return aiohttp.ClientSession(cookies=cook, timeout=time)
 
     def start(self):
         if self.commons[DataKey.IS_SMILE]:
