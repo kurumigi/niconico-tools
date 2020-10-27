@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 from string import Template
 from typing import Dict, Union, Optional, List
@@ -187,6 +188,7 @@ class Info(utils.Canopy):
             KeyDmc.FILE_NAME    : utils.t2filename(_video["title"]),  # type: str
             KeyDmc.FILE_SIZE    : None,  # type: Optional[int]
             KeyDmc.THUMBNAIL_URL: _video["thumbnailURL"],  # type: str
+            KeyDmc.POST_TIME    : _video["postedDateTime"],  # type: str
             KeyDmc.ECO          : bool(j["context"]["isPeakTime"]),  # type: bool
             KeyDmc.MOVIE_TYPE   : _video["movieType"],  # type: str
             KeyDmc.IS_DELETED   : _video["isDeleted"],  # type: bool
@@ -268,6 +270,7 @@ class Info(utils.Canopy):
             KeyDmc.FILE_NAME    : utils.t2filename(flash_vars["videoTitle"]),
             KeyDmc.FILE_SIZE    : None,  # type: Optional[int]
             KeyDmc.THUMBNAIL_URL: flash_vars["thumbImage"],  # type: str
+            KeyDmc.POST_TIME    : watch_api["videoDetail"]["postedAt"],  # type: str
             KeyDmc.ECO          : bool(flash_vars.get("eco", 0)),  # type: bool
             KeyDmc.MOVIE_TYPE   : flash_vars["movie_type"],  # type: str
             KeyDmc.IS_DELETED   : watch_api["videoDetail"]["isDeleted"],  # type: bool
@@ -417,6 +420,9 @@ class Thumbnail(utils.Canopy):
 
             with file_path.open('wb') as f:
                 f.write(image_data)
+
+            mtime = utils.make_mtime(self.glossary[video_id][KeyDmc.POST_TIME])
+            os.utime(file_path, (time.time(), mtime))
             self.logger.info(Msg.nd_download_done.format(path=file_path))
             self.done.append(video_id)
 
@@ -681,6 +687,9 @@ class VideoSmile:
                     with open(name, "rb") as file:
                         fd.write(file.read())
                     os.remove(name)
+
+            mtime = utils.make_mtime(self.glossary[video_id][KeyDmc.POST_TIME])
+            os.utime(file_path, (time.time(), mtime))
             self.logger.info(Msg.nd_download_done.format(path=file_path))
 
 
@@ -1015,6 +1024,9 @@ class VideoDmc:
                     with open(name, "rb") as file:
                         fd.write(file.read())
                     os.remove(name)
+
+            mtime = utils.make_mtime(self.glossary[video_id][KeyDmc.POST_TIME])
+            os.utime(file_path, (time.time(), mtime))
             self.logger.info(Msg.nd_download_done.format(path=file_path))
 
 
@@ -1151,6 +1163,9 @@ class Comment(utils.Canopy):
         file_path = utils.make_name(self.glossary[video_id], self.save_dir, extention=extention)
         with file_path.open("w", encoding="utf-8") as f:
             f.write(comment_data + "\n")
+
+        mtime = utils.make_mtime(self.glossary[video_id][KeyDmc.POST_TIME])
+        os.utime(file_path, (time.time(), mtime))
         self.logger.info(Msg.nd_download_done.format(path=file_path))
         return True
 

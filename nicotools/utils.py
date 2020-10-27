@@ -5,6 +5,8 @@ import logging
 import os
 import re
 import sys
+import time
+from datetime import datetime
 from argparse import ArgumentParser
 from getpass import getpass
 from pathlib import Path
@@ -232,6 +234,14 @@ def make_name(data: dict, save_dir: Path, extention: str=None):
     file_name =  Msg.nd_file_name.format(vid=data[KeyDmc.VIDEO_ID], ext=ext, name=data[KeyGTI.FILE_NAME])
     return Path(save_dir).resolve() / file_name
 
+def make_mtime(time: str):
+    """
+    投稿時間をエポック秒に変換する。
+
+    :param str time: 文字列で表現された投稿時間
+    :rtype: time
+    """
+    return datetime.strptime(time + " +0900", "%Y/%m/%d %H:%M:%S %z").timestamp()
 
 class Canopy:
     def __init__(self, loop: asyncio.AbstractEventLoop=None, logger=None):
@@ -748,6 +758,7 @@ class KeyDmc:
     VIDEO_URL_SM    = "video_url"       # Smile サーバーのほう
     TITLE           = "title"
     THUMBNAIL_URL   = "thumbnail_url"
+    POST_TIME       = "post_time"
     ECO             = "eco"             # bool
     MOVIE_TYPE      = "movie_type"
     IS_DELETED      = "is_deleted"      # bool
